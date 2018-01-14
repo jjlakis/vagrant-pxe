@@ -1,0 +1,28 @@
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+
+# Taki MAC maja VMki bez ustawionego domyslnego MACa. Nigdzie tego nie ustawiamy chyba. To nie ma kurwa nic do rzeczy. Po prostu by default jest taki sam eth0, to nie jest dziedziczenie. Interesuje nas tylko eth1 !! 
+# To jest interfejs produkowany przez vagranta, bitches. Defaultowy. 
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:8d:c0:4d brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe8d:c04d/64 scope link 
+       valid_lft forever preferred_lft forever
+
+# To ustawiamy w isc-dhcp-server no i to jest IPik dla private_network, (vb_intnet: pxe_network)
+# Ale jak ustawimy w isc-dhcp-server inna nazwe niz eth1 to wyklada sie na tworzeniu interfejsow
+# (tj, timeoutuje). Debian nie zapodaje 
+# Z tego interfejsu serwuje requesty DHCP. 
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:fb:98:cf brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.254/24 brd 192.168.0.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fefb:98cf/64 scope link 
+       valid_lft forever preferred_lft forever
+
+			
