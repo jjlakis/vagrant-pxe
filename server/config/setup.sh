@@ -1,9 +1,14 @@
 #!/bin/bash
 
+
+
 ### DHCPD configuration
+apt-get update
 apt-get install -y isc-dhcp-server
 cp /config/ressources/dhcpd.conf /etc/dhcp/dhcpd.conf
 cp /config/ressources/isc-dhcp-server /etc/default/isc-dhcp-server
+echo "local7.* -/var/log/dhcp.log" >> /etc/rsyslog.conf
+systemctl restart rsyslog
 systemctl restart isc-dhcp-server
 
 ### TFTPD configuration
@@ -16,4 +21,4 @@ cp /config/ressources/pxelinux.0 /tftpboot
 systemctl restart tftpd-hpa
 
 ### PXE configuration
-apt-get install -y pxe
+#apt-get install -y pxe
